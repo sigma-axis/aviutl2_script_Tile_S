@@ -2,7 +2,7 @@
 
 規則的なパターン模様を生成するスクリプトです．動画の背景素材などとして利用できます．
 
-[ダウンロードはこちら．](https://github.com/sigma-axis/aviutl2_script_Tile_S/releases)
+[ダウンロードはこちら．](https://github.com/sigma-axis/aviutl2_script_Tile_S/releases) [紹介動画．](https://www.nicovideo.jp/watch/sm45311665)
 
 次のオブジェクトが追加されます:
 
@@ -316,7 +316,7 @@
 
 ##  改版履歴
 
-- **v1.00 (for beta7)** (2025-08-??)
+- **v1.00 (for beta7)** (2025-08-20)
 
   - 初版．
 
