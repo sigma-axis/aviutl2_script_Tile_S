@@ -29,7 +29,7 @@ jobs:
     - name: Pack and compress
       run: |
         mkdir pack
-        cp *.anm2 pack
+        cp *.obj2 pack
         cp *.md pack
         cp LICENSE pack/LICENSE
         cd pack
