@@ -24,7 +24,7 @@ https://mit-license.org/
 ]]
 
 @四角タイルσ
---information:四角タイルσ@Tile_S v1.00 (for beta7) by σ軸
+--information:四角タイルσ@Tile_S v1.01 (for beta7) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
@@ -166,8 +166,8 @@ alpha_back = tonumber(PI.alpha_back) or alpha_back;
 field_as_num(PI, fig, "back_w");
 field_as_num(PI, fig, "back_h");
 rotate = tonumber(PI.rotate) or rotate;
-X = tonumber(PI.X) or X;
-Y = tonumber(PI.Y) or Y;
+local X = tonumber(PI.X) or obj.track0;
+local Y = tonumber(PI.Y) or obj.track1;
 antialias = as_bool(PI.antialias, antialias ~= 0);
 
 -- normalize parameters.
@@ -193,7 +193,7 @@ block_square = block_square ~= 0;
 col_back = math.floor(0.5 + col_back) % 2 ^ 24;
 alpha_back = math.min(math.max(1 - alpha_back / 100, 0), 1);
 rotate = math.pi / 180 * rotate;
-local dx, dy = obj.track0 + width / 2, obj.track1 + height / 2;
+local dx, dy = X + width / 2, Y + height / 2;
 
 -- further calculations.
 if block_square then block_h = block_w end
@@ -259,7 +259,7 @@ obj.pixelshader("draw", "object", {},
 
 
 @三角タイルσ
---information:三角タイルσ@Tile_S v1.00 (for beta7) by σ軸
+--information:三角タイルσ@Tile_S v1.01 (for beta7) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
@@ -417,8 +417,8 @@ col_back = tonumber(PI.col_back) or col_back;
 alpha_back = tonumber(PI.alpha_back) or alpha_back;
 field_as_num(PI, fig, "back");
 rotate = tonumber(PI.rotate) or rotate;
-X = tonumber(PI.X) or X;
-Y = tonumber(PI.Y) or Y;
+local X = tonumber(PI.X) or obj.track0;
+local Y = tonumber(PI.Y) or obj.track1;
 antialias = as_bool(PI.antialias, antialias ~= 0);
 
 -- normalize parameters.
@@ -441,7 +441,7 @@ block = math.max(block, 1);
 col_back = math.floor(0.5 + col_back) % 2 ^ 24;
 alpha_back = math.min(math.max(1 - alpha_back / 100, 0), 1);
 rotate = math.pi / 180 * rotate;
-local dx, dy = obj.track0 + width / 2, obj.track1 + height / 2;
+local dx, dy = X + width / 2, Y + height / 2;
 
 -- further calculations.
 local function rgb(col, alpha)
@@ -520,7 +520,7 @@ obj.pixelshader("draw", "object", {},
 
 
 @六角タイルσ
---information:六角タイルσ@Tile_S v1.00 (for beta7) by σ軸
+--information:六角タイルσ@Tile_S v1.01 (for beta7) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
@@ -665,8 +665,8 @@ col_back = tonumber(PI.col_back) or col_back;
 alpha_back = tonumber(PI.alpha_back) or alpha_back;
 field_as_num(PI, fig, "back");
 rotate = tonumber(PI.rotate) or rotate;
-X = tonumber(PI.X) or X;
-Y = tonumber(PI.Y) or Y;
+local X = tonumber(PI.X) or obj.track0;
+local Y = tonumber(PI.Y) or obj.track1;
 antialias = as_bool(PI.antialias, antialias ~= 0);
 
 -- normalize parameters.
@@ -689,7 +689,7 @@ block = math.max(block, 1);
 col_back = math.floor(0.5 + col_back) % 2 ^ 24;
 alpha_back = math.min(math.max(1 - alpha_back / 100, 0), 1);
 rotate = math.pi / 180 * rotate;
-local dx, dy = obj.track0 + width / 2, obj.track1 + height / 2;
+local dx, dy = X + width / 2, Y + height / 2;
 
 -- further calculations.
 local function rgb(col, alpha)
@@ -756,7 +756,7 @@ obj.pixelshader("draw", "object", {},
 
 
 @菱形タイルσ
---information:菱形タイルσ@Tile_S v1.00 (for beta7) by σ軸
+--information:菱形タイルσ@Tile_S v1.01 (for beta7) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
@@ -903,8 +903,8 @@ col_back = tonumber(PI.col_back) or col_back;
 alpha_back = tonumber(PI.alpha_back) or alpha_back;
 field_as_num(PI, fig, "back");
 rotate = tonumber(PI.rotate) or rotate;
-X = tonumber(PI.X) or X;
-Y = tonumber(PI.Y) or Y;
+local X = tonumber(PI.X) or obj.track0;
+local Y = tonumber(PI.Y) or obj.track1;
 antialias = as_bool(PI.antialias, antialias ~= 0);
 
 -- normalize parameters.
@@ -928,7 +928,7 @@ block_h = math.max(block_h, 1);
 col_back = math.floor(0.5 + col_back) % 2 ^ 24;
 alpha_back = math.min(math.max(1 - alpha_back / 100, 0), 1);
 rotate = math.pi / 180 * rotate;
-local dx, dy = obj.track0 + width / 2, obj.track1 + height / 2;
+local dx, dy = X + width / 2, Y + height / 2;
 
 -- further calculations.
 local function rgb(col, alpha)
