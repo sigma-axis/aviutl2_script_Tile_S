@@ -62,7 +62,7 @@
 
 ##  パラメタの説明
 
-<img width="500" height="808" alt="六角タイルのGUI" src="https://github.com/user-attachments/assets/3fb554de-641b-468d-8cea-309506e7de5e" />
+<img width="500" height="982" alt="六角タイルのGUI" src="https://github.com/user-attachments/assets/73e763ea-9908-4933-9919-ea4b4bbd2e54" />
 
 各オブジェクトごとにパラメタの名前や効果，初期値が微妙に違いますが，基本的な部分は同じです．
 
