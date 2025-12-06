@@ -24,11 +24,12 @@ https://mit-license.org/
 ]]
 
 @四角タイルσ
---information:四角タイルσ@Tile_S v1.01 (for beta7) by σ軸
+--information:四角タイルσ@Tile_S v1.02-beta1 (for beta22a) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
---check@screen_size:背景サイズ,0
+--check@screen_size:背景サイズ,false
+--group:色設定,false
 --color@col1:色1,0xffffff
 --color@col_inner1:内部色1,0x606060
 --color@col2:色2,0xe0e0e0
@@ -41,19 +42,22 @@ https://mit-license.org/
 --track@alpha2:透明度2,0,100,0,0.01
 --track@alpha3:透明度3,0,100,0,0.01
 --track@alpha4:透明度4,0,100,0,0.01
+--group:タイル設定,false
 --track@block_w:マス幅,1,2000,64,0.1
 --track@block_h:マス高さ,1,2000,64,0.1
---check@block_square:マス正方形(幅のみで指定),1
+--check@block_square:マス正方形(幅のみで指定),true
 --track@line:ライン幅,0,1000,1000,0.1
 --track@radius:角半径,0,500,0,0.1
 --color@col_back:余白色,0x000000
 --track@alpha_back:余白透明度,0,100,100,0.01
 --track@back_w:余白幅,0,2000,0,0.1
 --track@back_h:余白高さ,0,2000,0,0.1
+--group:タイル配置,false
 --track@rotate:回転,-720,720,0,0.01
 --track0:X,-4000,4000,0,0.01
 --track1:Y,-4000,4000,0,0.01
---check@antialias:アンチエイリアス,0
+--group:その他,false
+--check@antialias:アンチエイリアス,false
 --value@PI:PI,{}
 --[[pixelshader@draw:
 struct figure {
@@ -152,7 +156,7 @@ local fig = {
 };
 width = tonumber(PI.width) or width;
 height = tonumber(PI.height) or height;
-screen_size = as_bool(PI.screen_size, screen_size ~= 0);
+screen_size = as_bool(PI.screen_size, screen_size);
 field_as_num(PI, fig, "col");
 field_as_num(PI, fig, "col_inner");
 field_as_num(PI, fig, "alpha");
@@ -168,7 +172,7 @@ field_as_num(PI, fig, "back_h");
 rotate = tonumber(PI.rotate) or rotate;
 local X = tonumber(PI.X) or obj.track0;
 local Y = tonumber(PI.Y) or obj.track1;
-antialias = as_bool(PI.antialias, antialias ~= 0);
+antialias = as_bool(PI.antialias, antialias);
 
 -- normalize parameters.
 if screen_size then
@@ -189,7 +193,6 @@ for i = 1, #fig do
 end
 block_w = math.max(block_w, 1);
 block_h = math.max(block_h, 1);
-block_square = block_square ~= 0;
 col_back = math.floor(0.5 + col_back) % 2 ^ 24;
 alpha_back = math.min(math.max(1 - alpha_back / 100, 0), 1);
 rotate = math.pi / 180 * rotate;
@@ -259,11 +262,12 @@ obj.pixelshader("draw", "object", {},
 
 
 @三角タイルσ
---information:三角タイルσ@Tile_S v1.01 (for beta7) by σ軸
+--information:三角タイルσ@Tile_S v1.02-beta1 (for beta22a) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
---check@screen_size:背景サイズ,0
+--check@screen_size:背景サイズ,false
+--group:色設定,false
 --color@col1:色1,0xffffff
 --color@col_inner1:内部色1,0xa0a0a0
 --color@col2:色2,0xe0e0e0
@@ -282,16 +286,19 @@ obj.pixelshader("draw", "object", {},
 --track@alpha4:透明度4,0,100,0,0.01
 --track@alpha5:透明度5,0,100,0,0.01
 --track@alpha6:透明度6,0,100,0,0.01
+--group:タイル設定,false
 --track@block:マス幅,1,2000,64,0.1
 --track@line:ライン幅,0,1000,1000,0.1
 --track@radius:角半径,0,500,0,0.1
 --color@col_back:余白色,0x808080
 --track@alpha_back:余白透明度,0,100,100,0.01
 --track@back:余白幅,0,2000,0,0.1
+--group:タイル配置,false
 --track@rotate:回転,-720,720,0,0.01
 --track0:X,-4000,4000,0,0.01
 --track1:Y,-4000,4000,0,0.01
---check@antialias:アンチエイリアス,1
+--group:その他,false
+--check@antialias:アンチエイリアス,true
 --value@PI:PI,{}
 --[[pixelshader@draw:
 struct figure {
@@ -406,7 +413,7 @@ local fig = {
 };
 width = tonumber(PI.width) or width;
 height = tonumber(PI.height) or height;
-screen_size = as_bool(PI.screen_size, screen_size ~= 0);
+screen_size = as_bool(PI.screen_size, screen_size);
 field_as_num(PI, fig, "col");
 field_as_num(PI, fig, "col_inner");
 field_as_num(PI, fig, "alpha");
@@ -419,7 +426,7 @@ field_as_num(PI, fig, "back");
 rotate = tonumber(PI.rotate) or rotate;
 local X = tonumber(PI.X) or obj.track0;
 local Y = tonumber(PI.Y) or obj.track1;
-antialias = as_bool(PI.antialias, antialias ~= 0);
+antialias = as_bool(PI.antialias, antialias);
 
 -- normalize parameters.
 if screen_size then
@@ -520,11 +527,12 @@ obj.pixelshader("draw", "object", {},
 
 
 @六角タイルσ
---information:六角タイルσ@Tile_S v1.01 (for beta7) by σ軸
+--information:六角タイルσ@Tile_S v1.02-beta1 (for beta22a) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
---check@screen_size:背景サイズ,0
+--check@screen_size:背景サイズ,false
+--group:色設定,false
 --color@col1:色1,0xffffff
 --color@col_inner1:内部色1,0x404040
 --color@col2:色2,0xe0e0e0
@@ -534,16 +542,19 @@ obj.pixelshader("draw", "object", {},
 --track@alpha1:透明度1,0,100,0,0.01
 --track@alpha2:透明度2,0,100,0,0.01
 --track@alpha3:透明度3,0,100,0,0.01
+--group:タイル設定,false
 --track@block:マス幅,1,2000,64,0.1
 --track@line:ライン幅,0,1000,1000,0.1
 --track@radius:角半径,0,500,0,0.1
 --color@col_back:余白色,0x808080
 --track@alpha_back:余白透明度,0,100,100,0.01
 --track@back:余白幅,0,2000,0,0.1
+--group:タイル配置,false
 --track@rotate:回転,-720,720,0,0.01
 --track0:X,-4000,4000,0,0.01
 --track1:Y,-4000,4000,0,0.01
---check@antialias:アンチエイリアス,1
+--group:その他,false
+--check@antialias:アンチエイリアス,true
 --value@PI:PI,{}
 --[[pixelshader@draw:
 struct figure {
@@ -654,7 +665,7 @@ local fig = {
 };
 width = tonumber(PI.width) or width;
 height = tonumber(PI.height) or height;
-screen_size = as_bool(PI.screen_size, screen_size ~= 0);
+screen_size = as_bool(PI.screen_size, screen_size);
 field_as_num(PI, fig, "col");
 field_as_num(PI, fig, "col_inner");
 field_as_num(PI, fig, "alpha");
@@ -667,7 +678,7 @@ field_as_num(PI, fig, "back");
 rotate = tonumber(PI.rotate) or rotate;
 local X = tonumber(PI.X) or obj.track0;
 local Y = tonumber(PI.Y) or obj.track1;
-antialias = as_bool(PI.antialias, antialias ~= 0);
+antialias = as_bool(PI.antialias, antialias);
 
 -- normalize parameters.
 if screen_size then
@@ -756,11 +767,12 @@ obj.pixelshader("draw", "object", {},
 
 
 @菱形タイルσ
---information:菱形タイルσ@Tile_S v1.01 (for beta7) by σ軸
+--information:菱形タイルσ@Tile_S v1.02-beta1 (for beta22a) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
---check@screen_size:背景サイズ,0
+--check@screen_size:背景サイズ,false
+--group:色設定,false
 --color@col1:色1,0xffffff
 --color@col_inner1:内部色1,0x606060
 --color@col2:色2,0xe0e0e0
@@ -773,6 +785,7 @@ obj.pixelshader("draw", "object", {},
 --track@alpha2:透明度2,0,100,0,0.01
 --track@alpha3:透明度3,0,100,0,0.01
 --track@alpha4:透明度4,0,100,0,0.01
+--group:タイル設定,false
 --track@block_w:マス幅,1,2000,96,0.1
 --track@block_h:マス高さ,1,2000,64,0.1
 --track@line:ライン幅,0,1000,1000,0.1
@@ -780,10 +793,12 @@ obj.pixelshader("draw", "object", {},
 --color@col_back:余白色,0x000000
 --track@alpha_back:余白透明度,0,100,100,0.01
 --track@back:余白幅,0,2000,0,0.1
+--group:タイル配置,false
 --track@rotate:回転,-720,720,0,0.01
 --track0:X,-4000,4000,0,0.01
 --track1:Y,-4000,4000,0,0.01
---check@antialias:アンチエイリアス,1
+--group:その他,false
+--check@antialias:アンチエイリアス,true
 --value@PI:PI,{}
 --[[pixelshader@draw:
 struct figure {
@@ -891,7 +906,7 @@ local fig = {
 };
 width = tonumber(PI.width) or width;
 height = tonumber(PI.height) or height;
-screen_size = as_bool(PI.screen_size, screen_size ~= 0);
+screen_size = as_bool(PI.screen_size, screen_size);
 field_as_num(PI, fig, "col");
 field_as_num(PI, fig, "col_inner");
 field_as_num(PI, fig, "alpha");
@@ -905,7 +920,7 @@ field_as_num(PI, fig, "back");
 rotate = tonumber(PI.rotate) or rotate;
 local X = tonumber(PI.X) or obj.track0;
 local Y = tonumber(PI.Y) or obj.track1;
-antialias = as_bool(PI.antialias, antialias ~= 0);
+antialias = as_bool(PI.antialias, antialias);
 
 -- normalize parameters.
 if screen_size then
