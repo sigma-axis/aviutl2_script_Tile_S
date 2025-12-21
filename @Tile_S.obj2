@@ -24,7 +24,7 @@ https://mit-license.org/
 ]]
 
 @四角タイルσ
---information:四角タイルσ@Tile_S v1.02 (for beta22a) by σ軸
+--information:四角タイルσ@Tile_S v1.03-beta1 (for beta25) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
@@ -38,18 +38,18 @@ https://mit-license.org/
 --color@col_inner3:内部色3,0x000000
 --color@col4:色4,0xc0c0c0
 --color@col_inner4:内部色4,0x202020
+--color@col_back:余白色,0x000000
 --track@alpha1:透明度1,0,100,0,0.01
 --track@alpha2:透明度2,0,100,0,0.01
 --track@alpha3:透明度3,0,100,0,0.01
 --track@alpha4:透明度4,0,100,0,0.01
+--track@alpha_back:余白透明度,0,100,100,0.01
 --group:タイル設定,false
 --track@block_w:マス幅,1,2000,64,0.1
 --track@block_h:マス高さ,1,2000,64,0.1
 --check@block_square:マス正方形(幅のみで指定),true
 --track@line:ライン幅,0,1000,1000,0.1
 --track@radius:角半径,0,500,0,0.1
---color@col_back:余白色,0x000000
---track@alpha_back:余白透明度,0,100,100,0.01
 --track@back_w:余白幅,0,2000,0,0.1
 --track@back_h:余白高さ,0,2000,0,0.1
 --group:タイル配置,false
@@ -262,7 +262,7 @@ obj.pixelshader("draw", "object", {},
 
 
 @三角タイルσ
---information:三角タイルσ@Tile_S v1.02 (for beta22a) by σ軸
+--information:三角タイルσ@Tile_S v1.03-beta1 (for beta25) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
@@ -280,18 +280,18 @@ obj.pixelshader("draw", "object", {},
 --color@col_inner5:内部色5,0x202020
 --color@col6:色6,0x606060
 --color@col_inner6:内部色6,0x000000
+--color@col_back:余白色,0x808080
 --track@alpha1:透明度1,0,100,0,0.01
 --track@alpha2:透明度2,0,100,0,0.01
 --track@alpha3:透明度3,0,100,0,0.01
 --track@alpha4:透明度4,0,100,0,0.01
 --track@alpha5:透明度5,0,100,0,0.01
 --track@alpha6:透明度6,0,100,0,0.01
+--track@alpha_back:余白透明度,0,100,100,0.01
 --group:タイル設定,false
 --track@block:マス幅,1,2000,64,0.1
 --track@line:ライン幅,0,1000,1000,0.1
 --track@radius:角半径,0,500,0,0.1
---color@col_back:余白色,0x808080
---track@alpha_back:余白透明度,0,100,100,0.01
 --track@back:余白幅,0,2000,0,0.1
 --group:タイル配置,false
 --track@rotate:回転,-720,720,0,0.01
@@ -527,7 +527,7 @@ obj.pixelshader("draw", "object", {},
 
 
 @六角タイルσ
---information:六角タイルσ@Tile_S v1.02 (for beta22a) by σ軸
+--information:六角タイルσ@Tile_S v1.03-beta1 (for beta25) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
@@ -539,15 +539,15 @@ obj.pixelshader("draw", "object", {},
 --color@col_inner2:内部色2,0x202020
 --color@col3:色3,0xc0c0c0
 --color@col_inner3:内部色3,0x000000
+--color@col_back:余白色,0x808080
 --track@alpha1:透明度1,0,100,0,0.01
 --track@alpha2:透明度2,0,100,0,0.01
 --track@alpha3:透明度3,0,100,0,0.01
+--track@alpha_back:余白透明度,0,100,100,0.01
 --group:タイル設定,false
 --track@block:マス幅,1,2000,64,0.1
 --track@line:ライン幅,0,1000,1000,0.1
 --track@radius:角半径,0,500,0,0.1
---color@col_back:余白色,0x808080
---track@alpha_back:余白透明度,0,100,100,0.01
 --track@back:余白幅,0,2000,0,0.1
 --group:タイル配置,false
 --track@rotate:回転,-720,720,0,0.01
@@ -767,7 +767,7 @@ obj.pixelshader("draw", "object", {},
 
 
 @菱形タイルσ
---information:菱形タイルσ@Tile_S v1.02 (for beta22a) by σ軸
+--information:菱形タイルσ@Tile_S v1.03-beta1 (for beta25) by σ軸
 --label:カスタムオブジェクト
 --track@width:幅,0,4000,320,1
 --track@height:高さ,0,4000,320,1
@@ -781,17 +781,17 @@ obj.pixelshader("draw", "object", {},
 --color@col_inner3:内部色3,0x000000
 --color@col4:色4,0xc0c0c0
 --color@col_inner4:内部色4,0x202020
+--color@col_back:余白色,0x000000
 --track@alpha1:透明度1,0,100,0,0.01
 --track@alpha2:透明度2,0,100,0,0.01
 --track@alpha3:透明度3,0,100,0,0.01
 --track@alpha4:透明度4,0,100,0,0.01
+--track@alpha_back:余白透明度,0,100,100,0.01
 --group:タイル設定,false
 --track@block_w:マス幅,1,2000,96,0.1
 --track@block_h:マス高さ,1,2000,64,0.1
 --track@line:ライン幅,0,1000,1000,0.1
 --track@radius:角半径,0,707.12,0,0.1
---color@col_back:余白色,0x000000
---track@alpha_back:余白透明度,0,100,100,0.01
 --track@back:余白幅,0,2000,0,0.1
 --group:タイル配置,false
 --track@rotate:回転,-720,720,0,0.01
