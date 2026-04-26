@@ -13,6 +13,12 @@
 
 <img width="800" height="600" alt="使用例" src="https://github.com/user-attachments/assets/31b96a45-d0d2-4954-beae-8cdb6206a3bd" />
 
+##  お願い
+
+このスクリプトを使った動画などでは，ニコニコの親作品にこのスクリプトの紹介動画を登録してくれると嬉しいです．任意ではありますが，登録してくれたほうが励みになります．
+
+- 登録 ID: `sm45311665`
+
 ##  動作要件
 
 - AviUtl ExEdit2
