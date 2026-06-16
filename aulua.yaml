@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/karoterra/aviutl2-aulua/refs/heads/main/schema/aulua.schema.json
+project:
+  variables:
+    NAME: Tile_S
+    AUTHOR: σ軸
+    LEAST_AVIUTL_VERSION: "2005000"
+    LEAST_AVIUTL_VERSION_STRING: beta50
+
+package:
+  id: Tile_S
+  name: タイルパターン生成スクリプト Tile_S
+  version: v1.10-r1 (for beta50)
+  information: "{name} {version} by {AUTHOR}"
+  script_sub_dir: ""
+  uninstall_sub_folder_file: false
+  message:
+    text: |
+      # Basic_S AviUtl ExEdit2 タイルパターン生成スクリプト
+
+      規則的なパターン模様を生成するスクリプトです．動画の背景素材などとして利用できます．
+
+      公開ページ:
+      https://github.com/sigma-axis/aviutl2_script_Tile_S
+
+      紹介動画:
+      https://www.nicovideo.jp/watch/sm45311665
+
+      お願い:
+      ニコニコ動画での親作品登録をしていただけると励みになります．
+      作品 ID: sm45311665
+
+  assets:
+    - src: README.md
+      dest: Script/{id}/README.md
+    - src: LICENSE
+      dest: Script/{id}/LICENSE
+  file_name: package.au2pkg.zip
+
+build:
+  out_dir: build
+
+scripts:
+  - name: "@Tile_S.obj2"
+    sources:
+      - path: script/preamble.lua
+      - label: 四角タイルσ
+        path: script/rectangles/main.lua
+      - label: 三角タイルσ
+        path: script/triangles/main.lua
+      - label: 六角タイルσ
+        path: script/hexagons/main.lua
+      - label: 菱形タイルσ
+        path: script/rhombuses/main.lua
