@@ -101,6 +101,8 @@ local obj, tonumber, type, math, bit = obj, tonumber, type, math, require("bit")
 -- set anchors.
 obj.setanchor("X,Y", 0, "line");
 
+--#region PI / normalize parameters.
+
 -- take parameters.
 --[==[
 	PI = {
@@ -192,6 +194,8 @@ alpha_back = math.min(math.max(1 - alpha_back / 100, 0), 1);
 rotate = 2 * math.pi * ((rotate / 360) % 1);
 local dx, dy = X + width / 2, Y + height / 2;
 
+--#endregion PI / normalize parameters.
+
 -- further calculations.
 if block_square then block_h = block_w end
 local function rgb(col, alpha)
@@ -227,8 +231,7 @@ end
 
 -- draw by shader.
 obj.clearbuffer("object", width, height);
-obj.pixelshader("draw", "object", {},
-{
+obj.pixelshader("draw", "object", nil, {
 	fig[2].r,   fig[2].g,   fig[2].b,   fig[2].alpha;
 	fig[2].r_i, fig[2].g_i, fig[2].b_i, fig[2].alpha;
 	fig[2].back_w, fig[2].back_h, fig[2].line, fig[2].radius;
