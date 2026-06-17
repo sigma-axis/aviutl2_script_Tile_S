@@ -148,7 +148,7 @@ Although, usage documentations for this script in languages other than Japanese 
 
 [`PI`](#pi) を利用すれば，各タイルごとに個別に指定できます．
 
-ピクセル単位で指定，最小値は 0, 最大値は 500, 初期値は 500.
+ピクセル単位で指定，最小値は 0, 最大値は 1000, 初期値は 0.
 
 ### 余白色
 
@@ -178,7 +178,7 @@ Although, usage documentations for this script in languages other than Japanese 
 
 タイル模様全体を指定した角度だけ回転できます．回転中心は[「X」「Y」](#x-y)で指定します．
 
-単位は度数法，最小値は -720, 最大値は 720, 初期値は 0.
+単位は度数法，最小値は -3600, 最大値は 3600, 初期値は 0.
 
 ### X, Y
 
@@ -213,6 +213,7 @@ Although, usage documentations for this script in languages other than Japanese 
   -- number 型で "色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   ```
 
+`PI` のテキストボックスの記述では，下記における冒頭末尾の波括弧 (`{}`) は省略してください．
 
 ####  四角タイルσ の `PI`
 ```lua
@@ -238,8 +239,6 @@ Although, usage documentations for this script in languages other than Japanese 
   antialias = bool,    -- boolean 型で "アンチエイリアス" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
 }
 ```
-- テキストボックスには冒頭末尾の波括弧 (`{}`) を省略して記述してください．
-
 
 ####  三角タイルσ の `PI`
 ```lua
@@ -262,7 +261,6 @@ Although, usage documentations for this script in languages other than Japanese 
   antialias = bool,   -- boolean 型で "アンチエイリアス" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
 }
 ```
-- テキストボックスには冒頭末尾の波括弧 (`{}`) を省略して記述してください．
 
 
 ####  六角タイルσ の `PI`
@@ -286,7 +284,6 @@ Although, usage documentations for this script in languages other than Japanese 
   antialias = bool,   -- boolean 型で "アンチエイリアス" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
 }
 ```
-- テキストボックスには冒頭末尾の波括弧 (`{}`) を省略して記述してください．
 
 
 ####  菱形タイルσ の `PI`
@@ -311,7 +308,6 @@ Although, usage documentations for this script in languages other than Japanese 
   antialias = antialias,     -- boolean 型で "アンチエイリアス" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
 }
 ```
-- テキストボックスには冒頭末尾の波括弧 (`{}`) を省略して記述してください．
 
 ##  次の改版予定
 

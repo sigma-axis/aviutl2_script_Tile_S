@@ -75,10 +75,10 @@ local alpha_back = 100
 ---$track:マス幅, min = 1, max = 2000, step = 0.01, scale = 0.25
 local block = 64
 
----$track:ライン幅, min = 0, max = 1000, step = 0.01, scale = 0.5
+---$track:ライン幅, min = 0, max = 1000, step = 0.01, scale = 0.25
 local line = 1000
 
----$track:角半径, min = 0, max = 1000, step = 0.01, scale = 0.5
+---$track:角半径, min = 0, max = 1000, step = 0.01, scale = 0.25
 local radius = 0
 
 ---$track:余白幅, min = 0, max = 2000, step = 0.01, scale = 0.25

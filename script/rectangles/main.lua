@@ -63,10 +63,10 @@ local block_h = 64
 ---$checksection:マス正方形(幅のみで指定)
 local block_square = true,false
 
----$track:ライン幅, min = 0, max = 1000, step = 0.01, scale = 0.5
+---$track:ライン幅, min = 0, max = 1000, step = 0.01, scale = 0.25
 local line = 1000
 
----$track:角半径, min = 0, max = 1000, step = 0.01, scale = 0.5
+---$track:角半径, min = 0, max = 1000, step = 0.01, scale = 0.25
 local radius = 0
 
 ---$track:余白幅, min = 0, max = 2000, step = 0.01, scale = 0.25

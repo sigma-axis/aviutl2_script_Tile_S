@@ -66,7 +66,7 @@ float4 draw(float4 pos : SV_Position) : SV_Target
 	const int2 pt_i = modf_n(mul(to_lattice, pos.xy - offset), pt);
 
 	uint3 idx1 = { 0, 3, 5 }, idx2 = { 4, 1, 2 };
-	idx1 += modulo3(pt_i.x + pt_i.y);
+	idx1 += modulo3(dot(pt_i, 1));
 	idx2 += idx1.x; idx1 %= 6; idx2 %= 6;
 
 	if (pt.x < pt.y) {
