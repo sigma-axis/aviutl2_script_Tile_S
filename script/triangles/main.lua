@@ -1,10 +1,10 @@
 --information:三角タイルσ@Tile_S ${PACKAGE_VERSION} by ${AUTHOR}
 --label:Tile_S
 --require:${LEAST_AVIUTL_VERSION}
----$track:幅, min = 0, max = 4000, step = 1
+---$track:幅, min = 0, max = 4000, step = 1, scale = 0.25
 local width = 320
 
----$track:高さ, min = 0, max = 4000, step = 1
+---$track:高さ, min = 0, max = 4000, step = 1, scale = 0.25
 local height = 320
 
 ---$checksection:背景サイズ
@@ -72,26 +72,26 @@ local alpha6 = 0
 local alpha_back = 100
 
 --group:タイル設定,false
----$track:マス幅, min = 1, max = 2000, step = 0.1
+---$track:マス幅, min = 1, max = 2000, step = 0.01, scale = 0.25
 local block = 64
 
----$track:ライン幅, min = 0, max = 1000, step = 0.1
+---$track:ライン幅, min = 0, max = 1000, step = 0.01, scale = 0.5
 local line = 1000
 
----$track:角半径, min = 0, max = 500, step = 0.1
+---$track:角半径, min = 0, max = 1000, step = 0.01, scale = 0.5
 local radius = 0
 
----$track:余白幅, min = 0, max = 2000, step = 0.1
+---$track:余白幅, min = 0, max = 2000, step = 0.01, scale = 0.25
 local back = 0
 
 --group:タイル配置,false
----$track:回転, min = -720, max = 720, step = 0.01
+---$track:回転, min = -3600, max = 3600, step = 0.01, scale = 0.1
 local rotate = 0
 
----$track:X, min = -4000, max = 4000, step = 0.01
+---$track:X, min = -4000, max = 4000, step = 0.01, scale = 0.25
 local X = 0
 
----$track:Y, min = -4000, max = 4000, step = 0.01
+---$track:Y, min = -4000, max = 4000, step = 0.01, scale = 0.25
 local Y = 0
 
 --trackgroup@X,Y:tile_pos
@@ -109,6 +109,8 @@ local obj, tonumber, type, math, bit = obj, tonumber, type, math, require("bit")
 
 -- set anchors.
 obj.setanchor("X,Y", 0, "line");
+
+--#region PI / normalize parameters.
 
 --take parameters.
 --[==[
@@ -194,8 +196,10 @@ end
 block = math.max(block, 1);
 col_back = math.floor(0.5 + col_back) % 2 ^ 24;
 alpha_back = math.min(math.max(1 - alpha_back / 100, 0), 1);
-rotate = math.pi / 180 * rotate;
+rotate = 2 * math.pi * ((rotate / 360) % 1);
 local dx, dy = X + width / 2, Y + height / 2;
+
+--#endregion PI / normalize parameters.
 
 -- further calculations.
 local function rgb(col, alpha)
@@ -218,56 +222,52 @@ end
 for i = 1, #fig do
 	local f = fig[i];
 	f.r, f.g, f.b, f.r_i, f.g_i, f.b_i = col_pair(f.line, f.col, f.col_inner, f.alpha);
-	f.back = math.min((1 / 3 ^ 0.5) * f.back / block, 1);
-	f.line = (2 / 3 ^ 0.5) * f.line / block;
-	f.radius = math.min((2 * 3 ^ 0.5) * f.radius / block, 1 - 3 * f.back);
+	f.back = math.min(f.back, block / (2 * 3 ^ 0.5));
+	f.radius = math.min(f.radius, block / (2 * 3 ^ 0.5) - f.back);
 end
 local r_bk, g_bk, b_bk = rgb(col_back, alpha_back);
 
 local m11, m12, m21, m22 =
-	1, 1 / 3 ^ 0.5,
-	0, 2 / 3 ^ 0.5 do
-	local c, s = math.cos(rotate), math.sin(rotate);
+	1, -1 / 3 ^ 0.5,
+	0, -2 / 3 ^ 0.5 do
+	local c, s = math.cos(rotate) / block, math.sin(rotate) / block;
 	m11, m12, m21, m22 =
 		-- multiplication of M * (rotation matrix).
 		m11 * c - m12 * s, m11 * s + m12 * c,
 		m21 * c - m22 * s, m21 * s + m22 * c;
-	m11, m12, m21, m22 = m11 / block, m12 / block, m21 / block, m22 / block;
 end
 
 -- draw by shader.
-obj.setoption("drawtarget", "tempbuffer", width, height);
-obj.load("tempbuffer");
-obj.pixelshader("draw", "object", {},
-{
-	fig[3].r,   fig[3].g,   fig[3].b,   fig[3].alpha;
-	fig[3].r_i, fig[3].g_i, fig[3].b_i, fig[3].alpha;
-	fig[3].back, fig[3].line, fig[3].radius, 0;
-
-	fig[4].r,   fig[4].g,   fig[4].b,   fig[4].alpha;
-	fig[4].r_i, fig[4].g_i, fig[4].b_i, fig[4].alpha;
-	fig[4].back, fig[4].line, fig[4].radius, 0;
-
+obj.clearbuffer("object", width, height);
+obj.pixelshader("draw", "object", nil, {
 	fig[1].r,   fig[1].g,   fig[1].b,   fig[1].alpha;
 	fig[1].r_i, fig[1].g_i, fig[1].b_i, fig[1].alpha;
 	fig[1].back, fig[1].line, fig[1].radius, 0;
-
-	fig[6].r,   fig[6].g,   fig[6].b,   fig[6].alpha;
-	fig[6].r_i, fig[6].g_i, fig[6].b_i, fig[6].alpha;
-	fig[6].back, fig[6].line, fig[6].radius, 0;
 
 	fig[5].r,   fig[5].g,   fig[5].b,   fig[5].alpha;
 	fig[5].r_i, fig[5].g_i, fig[5].b_i, fig[5].alpha;
 	fig[5].back, fig[5].line, fig[5].radius, 0;
 
+	fig[3].r,   fig[3].g,   fig[3].b,   fig[3].alpha;
+	fig[3].r_i, fig[3].g_i, fig[3].b_i, fig[3].alpha;
+	fig[3].back, fig[3].line, fig[3].radius, 0;
+
 	fig[2].r,   fig[2].g,   fig[2].b,   fig[2].alpha;
 	fig[2].r_i, fig[2].g_i, fig[2].b_i, fig[2].alpha;
 	fig[2].back, fig[2].line, fig[2].radius, 0;
+
+	fig[4].r,   fig[4].g,   fig[4].b,   fig[4].alpha;
+	fig[4].r_i, fig[4].g_i, fig[4].b_i, fig[4].alpha;
+	fig[4].back, fig[4].line, fig[4].radius, 0;
+
+	fig[6].r,   fig[6].g,   fig[6].b,   fig[6].alpha;
+	fig[6].r_i, fig[6].g_i, fig[6].b_i, fig[6].alpha;
+	fig[6].back, fig[6].line, fig[6].radius, 0;
 
 	r_bk, g_bk, b_bk, alpha_back;
 
 	m11, m21, 0, 0,
 	m12, m22;
 
-	dx, dy; antialias and (2 / 3 ^ 0.5) / block or 0;
+	dx, dy; block; antialias and 1 or 0;
 });
