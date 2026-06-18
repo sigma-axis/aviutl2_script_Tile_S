@@ -72,7 +72,7 @@ local Y = 0
 ---$checksection:アンチエイリアス
 local antialias = true,false
 
---value:PI
+---$value:PI
 local PI = {}
 
 --[[pixelshader@draw:
