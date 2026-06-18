@@ -311,6 +311,7 @@ Although, usage documentations for this script in languages other than Japanese 
 
 - **v1.10 (for beta50)** (2026-??-??)
 
+  - 描画処理を書き直し，アンチエイリアス処理を改善．
   - 初期ラベルを「カスタムオブジェクト」から「Tile_S」に変更．
   - 各種トラックバーのマウス操作倍率の設定や，チェックボックスを中間点ごとに可変なタイプへ置き換えるなどの GUI 調整．
 
