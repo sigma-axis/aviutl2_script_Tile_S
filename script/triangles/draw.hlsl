@@ -46,10 +46,6 @@ uint modulo3(int x)
 {
 	return uint(x + 0x7ffffffe) % 3; // incorrect exceptions at x = -2^31, -2^31+1 (unlikely occur).
 }
-void swap(inout uint x, inout uint y)
-{
-	uint t = x; x = y; y = t;
-}
 float4 draw(float4 pos : SV_Position) : SV_Target
 {
 	static const float2x2 to_triangle = { 1, -0.5, 0, sqrt(3) / 2 };
@@ -65,33 +61,30 @@ float4 draw(float4 pos : SV_Position) : SV_Target
 	float2 pt;
 	const int2 pt_i = modf_n(mul(to_lattice, pos.xy - offset), pt);
 
-	uint3 idx1 = { 0, 3, 5 }, idx2 = { 4, 1, 2 };
-	idx1 += modulo3(dot(pt_i, 1));
-	idx2 += idx1.x; idx1 %= 6; idx2 %= 6;
+	uint3 idx1 = { 0, 2, 1 }, idx2;
+	idx1 += modulo3(dot(pt_i, 1)); idx1 %= 3; idx2 = idx1 + 3;
 
 	if (pt.x < pt.y) {
 		pt = pt.yx;
-		idx1.xy = idx1.yx;
-		idx2.xy = idx2.yx;
-		swap(idx1.z, idx2.z);
+		uint3 t = idx1; idx1 = idx2; idx2 = t;
 	}
 	if (dot(pt, 1) > 1) {
 		pt = 1 - pt.yx;
-		idx2.xz = idx2.zx;
-		swap(idx1.z, idx2.y);
+		idx1.yz = idx1.zy;
+		idx2.yz = idx2.zy;
 	}
 	if (dot(pt, float2(2, -1)) > 1) {
 		pt.x = 1 - pt.x + pt.y;
-		idx2.xz = idx2.zx;
-		swap(idx1.x, idx2.y);
+		idx1.xz = idx1.zx;
+		idx2.yz = idx2.zy;
 	}
 
 	pt = size * mul(to_triangle, pt);
-	const float4 col = find_color(pt, idx1[1])
+	const float4 col = find_color(pt, idx2[0])
 		+ find_color(pt - 2 * dot(pt, n[0]) * n[0], idx1[0])
-		+ find_color(pt - 2 * dot(pt, n[2]) * n[2], idx1[2])
-		+ find_color(pt - 2 * dot(pt, n[3]) * n[3], idx2[0])
-		+ find_color(pt - 2 * dot(pt, n[4]) * n[4], idx2[1])
-		+ find_color(pt - 2 * dot(pt, n[5]) * n[5], idx2[2]);
+		+ find_color(pt - 2 * dot(pt, n[2]) * n[2], idx1[1])
+		+ find_color(pt - 2 * dot(pt, n[3]) * n[3], idx2[2])
+		+ find_color(pt - 2 * dot(pt, n[4]) * n[4], idx1[2])
+		+ find_color(pt - 2 * dot(pt, n[5]) * n[5], idx2[1]);
 	return col + (1 - col.a) * color_back;
 }
