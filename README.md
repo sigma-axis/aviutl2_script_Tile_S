@@ -307,9 +307,9 @@ Although, usage documentations for this script in languages other than Japanese 
 }
 ```
 
-##  次の改版予定
+##  改版履歴
 
-- **v1.10 (for beta50)** (2026-??-??)
+- **v1.10 (for beta50)** (2026-06-19)
 
   - 描画処理を書き直し，アンチエイリアス処理を改善．
   - 初期ラベルを「カスタムオブジェクト」から「Tile_S」に変更．
@@ -325,8 +325,6 @@ Although, usage documentations for this script in languages other than Japanese 
       スクリプトフォルダ，またはその 1 階層下のサブフォルダ内に配置されています．
 
   - `beta50` での動作確認．
-
-##  改版履歴
 
 - **v1.03 (for beta25)** (2025-12-22)
 
