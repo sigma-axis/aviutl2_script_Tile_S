@@ -14,11 +14,6 @@ int2 modf_n(float2 pt, out float2 pt_f)
 	pt_f = frac(pt);
 	return int2(round(pt - pt_f));
 }
-void min_max(float x, float y, out float m, out float M)
-{
-	if (x < y) { m = x; M = y; }
-	else { m = y; M = x; }
-}
 float aa_step(float x)
 {
 	return smoothstep(-aa_thick / 2, aa_thick / 2, x);
