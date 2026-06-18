@@ -11,7 +11,7 @@
 1.  [六角タイルσ](#六角タイルσ)
 1.  [菱形タイルσ](#菱形タイルσ)
 
-<img width="800" height="600" alt="使用例" src="https://github.com/user-attachments/assets/31b96a45-d0d2-4954-beae-8cdb6206a3bd" />
+![使用例](https://github.com/user-attachments/assets/639054d0-6c4a-4a80-a21c-0a8c65f9d41a)
 
 ##  お願い
 
