@@ -25,7 +25,7 @@
 
   http://spring-fragrance.mints.ne.jp/aviutl
 
-  - `beta25` で動作確認済み．
+  - `beta50` で動作確認済み．
 
 ## 導入方法
 
@@ -49,29 +49,27 @@ Although, usage documentations for this script in languages other than Japanese 
 
 長方形を並べたパターン模様です．4色に塗り分けられます．
 
-<img width="320" height="320" alt="四角タイルの例" src="https://github.com/user-attachments/assets/e6587352-a717-42ae-8048-b4213c6c58f9" />
+![四角タイルの例](https://github.com/user-attachments/assets/e6587352-a717-42ae-8048-b4213c6c58f9)
 
 ### 三角タイルσ
 
 正三角形を並べたパターン模様です．6色に塗り分けられます．
 
-<img width="320" height="320" alt="三角タイルの例" src="https://github.com/user-attachments/assets/0173d6e2-370c-426b-a002-ea85c92d8742" />
+![三角タイルの例](https://github.com/user-attachments/assets/0173d6e2-370c-426b-a002-ea85c92d8742)
 
 ### 六角タイルσ
 
 正六角形を並べたパターン模様です．3色に塗り分けられます．
 
-<img width="320" height="320" alt="六角タイルの例" src="https://github.com/user-attachments/assets/63f20ed7-4129-46cc-807b-cffa1801a333" />
+![六角タイルの例](https://github.com/user-attachments/assets/63f20ed7-4129-46cc-807b-cffa1801a333)
 
 ### 菱形タイルσ
 
 菱形を並べたパターン模様です．4色に塗り分けられます．
 
-<img width="320" height="320" alt="菱形タイルの例" src="https://github.com/user-attachments/assets/35a9bbc7-36e2-4e6e-8b6f-f36af22a3138" />
+![菱形タイルの例](https://github.com/user-attachments/assets/35a9bbc7-36e2-4e6e-8b6f-f36af22a3138)
 
 ##  パラメタの説明
-
-<img width="500" height="982" alt="六角タイルのGUI" src="https://github.com/user-attachments/assets/f7971c08-a746-4218-91da-e838a5f0eec2" />
 
 各オブジェクトごとにパラメタの名前や効果，初期値が微妙に違いますが，基本的な部分は同じです．
 

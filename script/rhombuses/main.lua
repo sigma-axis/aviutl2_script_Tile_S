@@ -1,10 +1,10 @@
 --information:菱形タイルσ@Tile_S ${PACKAGE_VERSION} by ${AUTHOR}
 --label:Tile_S
 --require:${LEAST_AVIUTL_VERSION}
----$track:幅, min = 0, max = 4000, step = 1
+---$track:幅, min = 0, max = 4000, step = 1, scale = 0.25
 local width = 320
 
----$track:高さ, min = 0, max = 4000, step = 1
+---$track:高さ, min = 0, max = 4000, step = 1, scale = 0.25
 local height = 320
 
 ---$checksection:背景サイズ
@@ -54,30 +54,29 @@ local alpha4 = 0
 local alpha_back = 100
 
 --group:タイル設定,false
----$track:マス幅, min = 1, max = 2000, step = 0.1
+---$track:マス幅, min = 1, max = 2000, step = 0.01, scale = 0.25
 local block_w = 96
 
----$track:マス高さ, min = 1, max = 2000, step = 0.1
+---$track:マス高さ, min = 1, max = 2000, step = 0.01, scale = 0.25
 local block_h = 64
 
----$track:ライン幅, min = 0, max = 1000, step = 0.1
+---$track:ライン幅, min = 0, max = 1000, step = 0.01, scale = 0.25
 local line = 1000
 
---track@radius:角半径,0,707.12,0,0.1
----$track:角半径, min = 0, max = 707.12, step = 0.1
+---$track:角半径, min = 0, max = 1000, step = 0.01, scale = 0.25
 local radius = 0
 
----$track:余白幅, min = 0, max = 2000, step = 0.1
+---$track:余白幅, min = 0, max = 2000, step = 0.01, scale = 0.25
 local back = 0
 
 --group:タイル配置,false
----$track:回転, min = -720, max = 720, step = 0.01
+---$track:回転, min = -3600, max = 3600, step = 0.01, scale = 0.1
 local rotate = 0
 
----$track:X, min = -4000, max = 4000, step = 0.01
+---$track:X, min = -4000, max = 4000, step = 0.01, scale = 0.25
 local X = 0
 
----$track:Y, min = -4000, max = 4000, step = 0.01
+---$track:Y, min = -4000, max = 4000, step = 0.01, scale = 0.25
 local Y = 0
 
 --trackgroup@X,Y:tile_pos
@@ -204,9 +203,8 @@ local H = 0.5 * block_w * block_h / (block_w ^ 2 + block_h ^ 2) ^ 0.5
 for i = 1, #fig do
 	local f = fig[i];
 	f.r, f.g, f.b, f.r_i, f.g_i, f.b_i = col_pair(f.line, f.col, f.col_inner, f.alpha);
-	f.back = math.min(f.back / (4 * H), 0.5);
-	f.line = f.line / (2 * H);
-	f.radius = math.min(f.radius / H, 1 - 2 * f.back);
+	f.back = math.min(f.back / 2, H);
+	f.radius = math.min(f.radius, H - f.back);
 end
 local r_bk, g_bk, b_bk = rgb(col_back, alpha_back);
 
@@ -221,8 +219,7 @@ local m11, m12, m21, m22 =
 end
 
 -- draw by shader.
-obj.setoption("drawtarget", "tempbuffer", width, height);
-obj.load("tempbuffer");
+obj.clearbuffer("object", width, height);
 obj.pixelshader("draw", "object", {},
 {
 	fig[2].r,   fig[2].g,   fig[2].b,   fig[2].alpha;
@@ -246,5 +243,5 @@ obj.pixelshader("draw", "object", {},
 	m11, m21, 0, 0,
 	m12, m22;
 
-	dx, dy; block_w; block_h, antialias and 1 / (2 * H) or 0;
+	dx, dy; block_w; block_h, antialias and 1 or 0;
 });

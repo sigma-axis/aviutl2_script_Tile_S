@@ -14,39 +14,55 @@ int2 modf_n(float2 pt, out float2 pt_f)
 	pt_f = frac(pt);
 	return int2(round(pt - pt_f));
 }
+void min_max(float x, float y, out float m, out float M)
+{
+	if (x < y) { m = x; M = y; }
+	else { m = y; M = x; }
+}
+float aa_step(float x)
+{
+	return smoothstep(-aa_thick / 2, aa_thick / 2, x);
+}
+float4 mix_color(float dist, float aa_dist, float line_thick, float4 color, float4 color_inner)
+{
+	const float t1 = aa_step(dist) * aa_step(aa_dist), t2 = aa_step(dist - line_thick);
+	return t1 * lerp(color, color_inner, t2);
+}
+static const float l_size = length(size);
+static const float2 flip = { 1, -1 }, n_size = size / l_size;
+float4 find_color(float2 pt, float2 slope, uint idx)
+{
+	pt.x -= slope.x / 2;
+	if (dot(pt, slope) > 0) pt *= -1;
+	if (dot(pt, flip * slope) > 0) {
+		pt = flip * pt.yx;
+		slope = slope.yx;
+	}
+	pt.x += slope.x / 2;
+	pt *= l_size;
+
+	float2 u = pt; u.x = u.x - fig[idx].outer / slope.y;
+	float dist, aa_dist; min_max(dot(u, slope.yx), dot(u, flip * slope.yx), dist, aa_dist);
+	u.x = fig[idx].radius / slope.y - u.x;
+	if (all(float2(dot(u, slope), dot(u, flip * slope)) > 0))
+		dist = min(dist, fig[idx].radius - length(u));
+
+	return mix_color(dist, aa_dist,
+		fig[idx].line_thick, fig[idx].color, fig[idx].color_inner);
+}
 float4 draw(float4 pos : SV_Position) : SV_Target
 {
 	float2 pt;
 	const int2 pt_i = modf_n(mul(to_lattice, pos.xy - offset), pt);
+	const uint idx = (pt_i.x & 1) | ((pt_i.y & 1) << 1);
+	if (pt.x >= 0.5) pt = 1 - pt;
+	const float2 slope = pt.y >= 0.5 ? n_size.yx : n_size;
+	pt.y = min(pt.y, 1 - pt.y);
+	pt = slope * (flip * pt + pt.yx) / 2;
 
-	const int idx = uint(pt_i.x & 1) | (uint(pt_i.y & 1) << 1);
-	int idx2 = idx ^ 2;
-
-	float2 sz2 = size * size;
-	float N = sz2.x + sz2.y, D = sz2.x - sz2.y;
-	if (pt.x + pt.y > 1) pt = 1 - pt;
-	if (pt.x < pt.y) {
-		pt = float2(pt.y, pt.x);
-		idx2 ^= 3;
-	}
-	if (N * pt.x + D * pt.y > sz2.x) {
-		pt.x = 1 - pt.x;
-		sz2 = float2(sz2.y, sz2.x);
-		D = -D;
-	}
-
-	pt -= fig[idx].outer;
-	float dist = pt.y;
-	if (N * pt.x + D * pt.y < sz2.x * fig[idx].radius) {
-		const float U = pt.x + pt.y - fig[idx].radius, V = pt.x - pt.y,
-			r = sqrt((N / 4) * (U * U / sz2.y + V * V / sz2.x));
-		dist = min(dist, fig[idx].radius / 2 - r);
-	}
-
-	return lerp(lerp(fig[idx].color_inner, fig[idx].color,
-		smoothstep(-aa_thick / 2, aa_thick / 2, fig[idx].line_thick - dist)),
-		fig[idx].radius <= 0 && fig[idx2].radius <= 0 &&
-		fig[idx].outer <= 0 && fig[idx2].outer <= 0 ?
-		fig[idx2].color : color_back,
-		smoothstep(-aa_thick / 2, aa_thick / 2, -dist));
+	const float4 col = find_color(pt, slope, idx)
+		+ find_color(-flip * pt.yx, slope.yx, idx ^ 1)
+		+ find_color(-pt, slope, idx ^ 3)
+		+ find_color(flip * pt.yx, slope.yx, idx ^ 2);
+	return col + (1 - col.a) * color_back;
 }
