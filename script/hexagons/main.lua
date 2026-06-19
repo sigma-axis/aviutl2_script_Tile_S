@@ -208,10 +208,6 @@ end
 obj.clearbuffer("object", width, height);
 obj.pixelshader("draw", "object", {},
 {
-	fig[3].r,   fig[3].g,   fig[3].b,   fig[3].alpha;
-	fig[3].r_i, fig[3].g_i, fig[3].b_i, fig[3].alpha;
-	fig[3].back, fig[3].line, fig[3].radius, 0;
-
 	fig[1].r,   fig[1].g,   fig[1].b,   fig[1].alpha;
 	fig[1].r_i, fig[1].g_i, fig[1].b_i, fig[1].alpha;
 	fig[1].back, fig[1].line, fig[1].radius, 0;
@@ -219,6 +215,10 @@ obj.pixelshader("draw", "object", {},
 	fig[2].r,   fig[2].g,   fig[2].b,   fig[2].alpha;
 	fig[2].r_i, fig[2].g_i, fig[2].b_i, fig[2].alpha;
 	fig[2].back, fig[2].line, fig[2].radius, 0;
+
+	fig[3].r,   fig[3].g,   fig[3].b,   fig[3].alpha;
+	fig[3].r_i, fig[3].g_i, fig[3].b_i, fig[3].alpha;
+	fig[3].back, fig[3].line, fig[3].radius, 0;
 
 	r_bk, g_bk, b_bk, alpha_back;
 

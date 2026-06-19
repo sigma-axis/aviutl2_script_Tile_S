@@ -307,6 +307,12 @@ Although, usage documentations for this script in languages other than Japanese 
 }
 ```
 
+##  次の改版予定
+
+- **v1.11 (for beta50)** (2026-??-??)
+
+  - 「六角タイルσ」の色の順序が異なっていたのを修正．
+
 ##  改版履歴
 
 - **v1.10 (for beta50)** (2026-06-19)

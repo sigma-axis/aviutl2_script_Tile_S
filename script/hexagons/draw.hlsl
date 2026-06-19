@@ -53,7 +53,7 @@ float4 draw(float4 pos : SV_Position) : SV_Target
 
 	float2 pt;
 	const int2 pt_i = modf_n(mul(to_lattice, pos.xy - offset), pt);
-	uint3 idx = { 0, 1, 2 };
+	uint3 idx = { 1, 2, 0 };
 	idx += modulo3(dot(pt_i, int2(1, -1)));
 	switch (modulo3(dot(pt_i, 1))) {
 	case 0: break;
