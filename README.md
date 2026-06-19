@@ -11,7 +11,7 @@
 1.  [六角タイルσ](#六角タイルσ)
 1.  [菱形タイルσ](#菱形タイルσ)
 
-![使用例](https://github.com/user-attachments/assets/d9f451f0-47a8-44e5-ae23-5cd0146aff5f)
+![使用例](https://github.com/user-attachments/assets/a20a779d-907e-40f6-b4e8-265c412ce0a4)
 
 ##  お願い
 
@@ -49,25 +49,25 @@ Although, usage documentations for this script in languages other than Japanese 
 
 長方形を並べたパターン模様です．4色に塗り分けられます．
 
-![四角タイルの例](https://github.com/user-attachments/assets/e6587352-a717-42ae-8048-b4213c6c58f9)
+![四角タイルの例](https://github.com/user-attachments/assets/07fbeb1a-d086-4eaf-aeb4-772b6d7d5d1a)
 
 ### 三角タイルσ
 
 正三角形を並べたパターン模様です．6色に塗り分けられます．
 
-![三角タイルの例](https://github.com/user-attachments/assets/0173d6e2-370c-426b-a002-ea85c92d8742)
+![三角タイルの例](https://github.com/user-attachments/assets/a0023573-6f0d-43cf-9020-a6ed52144a96)
 
 ### 六角タイルσ
 
 正六角形を並べたパターン模様です．3色に塗り分けられます．
 
-![六角タイルの例](https://github.com/user-attachments/assets/63f20ed7-4129-46cc-807b-cffa1801a333)
+![六角タイルの例](https://github.com/user-attachments/assets/67d5d69e-c55b-407a-8c5c-9ace0ee2eb1a)
 
 ### 菱形タイルσ
 
 菱形を並べたパターン模様です．4色に塗り分けられます．
 
-![菱形タイルの例](https://github.com/user-attachments/assets/35a9bbc7-36e2-4e6e-8b6f-f36af22a3138)
+![菱形タイルの例](https://github.com/user-attachments/assets/01fc8a3f-5d77-495d-8a65-8fc8d2c303c3)
 
 ##  パラメタの説明
 
