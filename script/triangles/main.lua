@@ -10,6 +10,13 @@ local height = 320
 ---$checksection:背景サイズ
 local screen_size = false,false
 
+---$select:タイル種類
+---1種類 = 0
+---2種類 = 1
+---3種類 = 2
+---6種類 = 3
+local limit_tiles = 3
+
 --group:色設定,false
 ---$color:色1
 local col1 = 0xffffff
@@ -118,6 +125,7 @@ obj.setanchor("X,Y", 0, "line");
 		width:			number?,
 		height:			number?,
 		screen_size:	boolean|number|nil,
+		limit_tiles:	string?,
 		col:			table|number|nil,
 		col_inner:		table|number|nil,
 		alpha:			table|number|nil,
@@ -163,6 +171,10 @@ local fig = {
 width = tonumber(PI.width) or width;
 height = tonumber(PI.height) or height;
 screen_size = as_bool(PI.screen_size, screen_size);
+if type(PI.limit_tiles) == "string" then
+	local name2num = { ["1種類"] = 0, ["2種類"] = 1, ["3種類"] = 2, ["6種類"] = 3 };
+	limit_tiles = name2num[PI.limit_tiles] or limit_tiles;
+end
 field_as_num(PI, fig, "col");
 field_as_num(PI, fig, "col_inner");
 field_as_num(PI, fig, "alpha");
@@ -184,6 +196,7 @@ else
 	width = math.max(math.floor(0.5 + width), 0);
 	height = math.max(math.floor(0.5 + height), 0);
 end
+limit_tiles = math.min(math.max(math.floor(0.5 + limit_tiles), 0), 3);
 for i = 1, #fig do
 	local f = fig[i];
 	f.col = math.floor(0.5 + f.col) % 2 ^ 24;
@@ -225,6 +238,9 @@ for i = 1, #fig do
 	f.back = math.min(f.back, block / (2 * 3 ^ 0.5));
 	f.radius = math.min(f.radius, block / (2 * 3 ^ 0.5) - f.back);
 end
+if limit_tiles == 0 then fig[2], fig[3], fig[4], fig[5], fig[6] = fig[1], fig[1], fig[1], fig[1], fig[1];
+elseif limit_tiles == 1 then fig[3], fig[4], fig[5], fig[6] = fig[1], fig[2], fig[1], fig[2];
+elseif limit_tiles == 2 then fig[4], fig[5], fig[6] = fig[1], fig[2], fig[3] end
 local r_bk, g_bk, b_bk = rgb(col_back, alpha_back);
 
 local m11, m12, m21, m22 =

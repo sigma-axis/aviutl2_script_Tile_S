@@ -307,6 +307,12 @@ Although, usage documentations for this script in languages other than Japanese 
 }
 ```
 
+##  次の改版予定
+
+- **v1.20 (for beta50)** (2026-??-??)
+
+  - 「タイル種類」の設定項目を追加．4 色分けのタイルでも 2 色や 1 色に種類を制限して，色や透明度の設定を簡略化できます．
+
 ##  改版履歴
 
 - **v1.11 (for beta50)** (2026-06-19)
