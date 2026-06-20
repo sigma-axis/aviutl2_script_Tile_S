@@ -85,9 +85,9 @@ Although, usage documentations for this script in languages other than Japanese 
 
 タイルの色や透明度，ライン幅や余白などは，スクリプトによって 3 -- 6 種類に分けられていますが，この種類をもっと少ない種類に制限します．
 
-TODO: image.
+![種類数を制限したタイルの例](https://github.com/user-attachments/assets/35ba68bd-e4bf-4cdf-ba31-0036a7922175)
 
-[「四角タイルσ」](#四角タイルσ)で「2色」を指定すると[市松模様](https://ja.wikipedia.org/wiki/市松模様)になるなどで，簡単なパターンなら少ない設定で済むようになります．
+例えば[「四角タイルσ」](#四角タイルσ)で「2色」を指定すると[市松模様](https://ja.wikipedia.org/wiki/市松模様)になるなどで，簡単なパターンなら少ない設定で済むようになります．
 
 初期値は，そのスクリプトでの最大の種類数 (スクリプトによって異なる).
 
