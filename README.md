@@ -25,7 +25,7 @@
 
   http://spring-fragrance.mints.ne.jp/aviutl
 
-  - `beta50` で動作確認済み．
+  - `beta51` で動作確認済み．
 
 ## 導入方法
 
@@ -80,6 +80,16 @@ Although, usage documentations for this script in languages other than Japanese 
 「幅」と「高さ」はピクセル単位で指定，最小値は 0, 最大値は 4000, 初期値は 320.
 
 「背景サイズ」の初期値は OFF.
+
+### タイル種類
+
+タイルの色や透明度，ライン幅や余白などは，スクリプトによって 3 -- 6 種類に分けられていますが，この種類をもっと少ない種類に制限します．
+
+TODO: image.
+
+[「四角タイルσ」](#四角タイルσ)で「2色」を指定すると[市松模様](https://ja.wikipedia.org/wiki/市松模様)になるなどで，簡単なパターンなら少ない設定で済むようになります．
+
+初期値は，そのスクリプトでの最大の種類数 (スクリプトによって異なる).
 
 ### 色1, 色2, ...
 
@@ -219,6 +229,7 @@ Although, usage documentations for this script in languages other than Japanese 
   width = num,         -- number 型で "幅" の項目を上書き，または nil.
   height = num,        -- number 型で "高さ" の項目を上書き，または nil.
   screen_size = bool,  -- boolean 型で "背景サイズ" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
+  limit_tiles = str,   -- string 型で "タイル種類" の項目を上書き，または nil.
   col = num,           -- number 型で "色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   col_inner = num,     -- number 型で "内部色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   alpha = num,         -- number 型で "透明度*" の項目を上書き，table 型で各タイルごとに指定，または nil.
@@ -238,12 +249,19 @@ Although, usage documentations for this script in languages other than Japanese 
 }
 ```
 
+- `limit_tiles` に指定できる文字列は以下の通り:
+
+  ```lua
+  "1種類", "2種類", "4種類"
+  ```
+
 ####  三角タイルσ の `PI`
 ```lua
 {
   width = num,        -- number 型で "幅" の項目を上書き，または nil.
   height = num,       -- number 型で "高さ" の項目を上書き，または nil.
   screen_size = bool, -- boolean 型で "背景サイズ" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
+  limit_tiles = str,  -- string 型で "タイル種類" の項目を上書き，または nil.
   col = num,          -- number 型で "色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   col_inner = num,    -- number 型で "内部色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   alpha = num,        -- number 型で "透明度*" の項目を上書き，table 型で各タイルごとに指定，または nil.
@@ -259,6 +277,12 @@ Although, usage documentations for this script in languages other than Japanese 
   antialias = bool,   -- boolean 型で "アンチエイリアス" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
 }
 ```
+
+- `limit_tiles` に指定できる文字列は以下の通り:
+
+  ```lua
+  "1種類", "2種類", "3種類", "6種類"
+  ```
 
 
 ####  六角タイルσ の `PI`
@@ -267,6 +291,7 @@ Although, usage documentations for this script in languages other than Japanese 
   width = num,        -- number 型で "幅" の項目を上書き，または nil.
   height = num,       -- number 型で "高さ" の項目を上書き，または nil.
   screen_size = bool, -- boolean 型で "背景サイズ" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
+  limit_tiles = str,  -- string 型で "タイル種類" の項目を上書き，または nil.
   col = num,          -- number 型で "色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   col_inner = num,    -- number 型で "内部色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   alpha = num,        -- number 型で "透明度*" の項目を上書き，table 型で各タイルごとに指定，または nil.
@@ -283,6 +308,12 @@ Although, usage documentations for this script in languages other than Japanese 
 }
 ```
 
+- `limit_tiles` に指定できる文字列は以下の通り:
+
+  ```lua
+  "1種類", "3種類"
+  ```
+
 
 ####  菱形タイルσ の `PI`
 ```lua
@@ -290,6 +321,7 @@ Although, usage documentations for this script in languages other than Japanese 
   width = width,             -- number 型で "幅" の項目を上書き，または nil.
   height = height,           -- number 型で "高さ" の項目を上書き，または nil.
   screen_size = screen_size, -- boolean 型で "背景サイズ" の項目を上書き，または nil. 0 を false, 0 以外を true 扱いとして number 型も可能．
+  limit_tiles = str,         -- string 型で "タイル種類" の項目を上書き，または nil.
   col = col,                 -- number 型で "色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   col_inner = col_inner,     -- number 型で "内部色*" の項目を上書き，table 型で各タイルごとに指定，または nil.
   alpha = alpha,             -- number 型で "透明度*" の項目を上書き，table 型で各タイルごとに指定，または nil.
@@ -307,9 +339,16 @@ Although, usage documentations for this script in languages other than Japanese 
 }
 ```
 
+- `limit_tiles` に指定できる文字列は以下の通り:
+
+  ```lua
+  "1種類", "2種類", "4種類"
+  ```
+
+
 ##  次の改版予定
 
-- **v1.20 (for beta50)** (2026-??-??)
+- **v1.20 (for beta51)** (2026-??-??)
 
   - 「タイル種類」の設定項目を追加．4 色分けのタイルでも 2 色や 1 色に種類を制限して，色や透明度の設定を簡略化できます．
   - 「三角タイルσ」と「六角タイルσ」でアンチエイリアスが有効の場合，頂点部分が明るくなる傾向があったのを修正．
