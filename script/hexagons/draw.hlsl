@@ -16,7 +16,7 @@ int2 modf_n(float2 pt, out float2 pt_f)
 }
 float aa_step(float x)
 {
-	return smoothstep(-aa_thick / 2, aa_thick / 2, x);
+	return saturate(0.5 + (aa_thick > 0 ? x / aa_thick : sign(x)));
 }
 float4 mix_color(float dist, float line_thick, float4 color, float4 color_inner)
 {
@@ -31,6 +31,7 @@ float4 find_color(float2 pt, uint idx)
 		vec_tangent = { -0.5, sqrt(3) / 2 };
 	float2 u = pt - fig[idx].outer * vec_offset;
 	float dist = min(dot(vec_normal, u), u.y);
+	dist = min(dist, dot(u, vec_offset) - aa_thick / 6);
 	u = fig[idx].radius * vec_offset - u;
 	if (all(float2(u.x, dot(u, vec_tangent)) > 0))
 		dist = min(dist, fig[idx].radius - length(u));
@@ -48,7 +49,7 @@ float4 draw(float4 pos : SV_Position) : SV_Target
 	static const float2 n[3] = {
 		{ 0, 0 },
 		{ 0, 1 },
-		{ 0.5, sqrt(3) / 2 },
+		{ sqrt(3) / 2, 0.5 },
 	};
 
 	float2 pt;
