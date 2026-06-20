@@ -235,7 +235,7 @@ end
 for i = 1, #fig do
 	local f = fig[i];
 	f.r, f.g, f.b, f.r_i, f.g_i, f.b_i = col_pair(f.line, f.col, f.col_inner, f.alpha);
-	f.back = math.min(f.back, block / (2 * 3 ^ 0.5));
+	f.back = math.min(f.back / 2, block / (2 * 3 ^ 0.5));
 	f.radius = math.min(f.radius, block / (2 * 3 ^ 0.5) - f.back);
 end
 if limit_tiles == 0 then fig[2], fig[3], fig[4], fig[5], fig[6] = fig[1], fig[1], fig[1], fig[1], fig[1];
