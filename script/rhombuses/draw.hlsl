@@ -21,7 +21,7 @@ void min_max(float x, float y, out float m, out float M)
 }
 float aa_step(float x)
 {
-	return smoothstep(-aa_thick / 2, aa_thick / 2, x);
+	return saturate(0.5 + (aa_thick > 0 ? x / aa_thick : sign(x)));
 }
 float4 mix_color(float dist, float aa_dist, float line_thick, float4 color, float4 color_inner)
 {
