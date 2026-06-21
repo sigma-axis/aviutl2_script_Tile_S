@@ -8,7 +8,7 @@ local width = 320
 local height = 320
 
 ---$checksection:背景サイズ
-local screen_size = false,false
+local screen_size = false
 
 ---$select:タイル種類
 ---1種類 = 0
@@ -75,7 +75,7 @@ local Y = 0
 --trackgroup@X,Y:tile_pos
 --group:その他,false
 ---$checksection:アンチエイリアス
-local antialias = true,false
+local antialias = true
 
 ---$value:PI
 local PI = {}

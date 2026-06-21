@@ -8,7 +8,7 @@ local width = 320
 local height = 320
 
 ---$checksection:背景サイズ
-local screen_size = false,false
+local screen_size = false
 
 ---$select:タイル種類
 ---1種類 = 0
@@ -67,7 +67,7 @@ local block_w = 64
 local block_h = 64
 
 ---$checksection:マス正方形(幅のみで指定)
-local block_square = true,false
+local block_square = true
 
 ---$track:ライン幅, min = 0, max = 1000, step = 0.01, scale = 0.25
 local line = 1000
@@ -94,7 +94,7 @@ local Y = 0
 --trackgroup@X,Y:tile_pos
 --group:その他,false
 ---$checksection:アンチエイリアス
-local antialias = false,false
+local antialias = false
 
 ---$value:PI
 local PI = {}
