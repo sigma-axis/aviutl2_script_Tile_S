@@ -25,7 +25,7 @@
 
   http://spring-fragrance.mints.ne.jp/aviutl
 
-  - `beta51` で動作確認済み．
+  - `beta52` で動作確認済み．
 
 ## 導入方法
 
@@ -349,6 +349,14 @@ Although, usage documentations for this script in languages other than Japanese 
   "1種類", "2種類", "4種類"
   ```
 
+
+##  次の改版予定
+
+- **v1.21 (for beta52)** (2026-06-29)
+
+  - 「アンチエイリアス」が OFF の場合，ピクセルのちょうど中央を通るタイル境界が歪な形状になったり，穴抜け・重複が起こっていたのを修正．
+
+  - `beta52` での動作確認．
 
 ##  改版履歴
 

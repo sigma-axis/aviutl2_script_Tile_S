@@ -101,6 +101,8 @@ local obj, tonumber, type, math, bit = obj, tonumber, type, math, require("bit")
 -- set anchors.
 obj.setanchor("X,Y", 0, "line");
 
+--#region PI / normalize parameters.
+
 -- take parameters.
 --[==[
 	PI = {
@@ -193,7 +195,10 @@ alpha_back = math.min(math.max(1 - alpha_back / 100, 0), 1);
 rotate = math.pi / 180 * rotate;
 local dx, dy = X + width / 2, Y + height / 2;
 
+--#endregion PI / normalize parameters.
+
 -- further calculations.
+dx, dy = dx + 2 ^ -12, dy + 1.5 * 2 ^ -12;
 local function rgb(col, alpha)
 	return
 		alpha * (bit.band(col, 0xff0000) / 0xff0000),
