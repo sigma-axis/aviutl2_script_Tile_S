@@ -354,7 +354,7 @@ Although, usage documentations for this script in languages other than Japanese 
 
 - **v1.21 (for beta52)** (2026-06-29)
 
-  - 「アンチエイリアス」が OFF の場合，ピクセルのちょうど中央を通るタイル境界が歪な形状になったり，穴抜け・重複が起こっていたのを修正．
+  - 「アンチエイリアス」が OFF の場合，ピクセルのちょうど中央を通るタイル境界が歪な形状になったり，穴抜け・重複・混色が起こっていたのを修正．
 
   - `beta52` での動作確認．
 

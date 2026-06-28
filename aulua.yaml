@@ -15,7 +15,7 @@ package:
   uninstall_sub_folder_file: false
   message:
     text: |
-      # Basic_S AviUtl ExEdit2 タイルパターン生成スクリプト
+      # Tile_S AviUtl ExEdit2 タイルパターン生成スクリプト
 
       規則的なパターン模様を生成するスクリプトです．動画の背景素材などとして利用できます．
 
