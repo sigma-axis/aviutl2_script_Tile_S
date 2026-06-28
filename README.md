@@ -350,15 +350,15 @@ Although, usage documentations for this script in languages other than Japanese 
   ```
 
 
-##  次の改版予定
+##  改版履歴
 
 - **v1.21 (for beta52)** (2026-06-29)
 
   - 「アンチエイリアス」が OFF の場合，ピクセルのちょうど中央を通るタイル境界が歪な形状になったり，穴抜け・重複・混色が起こっていたのを修正．
 
-  - `beta52` での動作確認．
+  - D&D でインストール時のメッセージの誤字修正．
 
-##  改版履歴
+  - `beta52` での動作確認．
 
 - **v1.20 (for beta51)** (2026-06-21)
 

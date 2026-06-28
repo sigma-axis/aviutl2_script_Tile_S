@@ -8,22 +8,19 @@ env:
   REPOSITORY_NAME: Tile_S
 
   TIME_ZONE: Asia/Tokyo
-  TIME_ZONE_PWSH: Tokyo Standard Time
   # Time zone for the timestamp when releasing.
 
 permissions:
   contents: read
 
 jobs:
-  release:
-    name: Create Release
+  build:
+    name: Build with aulua
     if: github.event_name == 'push' && github.ref_type == 'tag'
     runs-on: windows-latest
     defaults:
       run:
         shell: bash
-    permissions:
-      contents: write
 
     steps:
       - uses: actions/checkout@v7
@@ -42,55 +39,62 @@ jobs:
           echo `pwd`/aulua > $GITHUB_PATH
 
       - name: Create package
-        run: |
-          aulua pack
-          cp build/package.au2pkg.zip "aviutl2_script_${{ env.REPOSITORY_NAME }}-${{ github.ref_name }}.au2pkg.zip"
+        run: aulua pack
 
-      - name: Prepare release name
-        id: release-name
-        shell: pwsh
-        run: |
-          $name = "${{ github.ref_name }}"
-          $date = [System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date).ToUniversalTime(), '${{ env.TIME_ZONE_PWSH }}')
-          $formatted = $date.ToString('yyyy-MM-dd')
-          echo "name=$name ($formatted)" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+      - name: Upload the build as artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          path: build/package.au2pkg.zip
+          archive: false
 
-        # $phase = 0
-        # Get-Content README.md | ForEach-Object {
-        #   $line = $_
-        #   if ($phase -eq 0) {
-        #     if ($line -match '^(##*)\s*改版履歴\s*$') { $phase = 1 }
-        #   }
-        #   elseif ($phase -eq 1) {
-        #     if ($line -match '^-\s') { $phase = 2 }
-        #   }
-        #   if ($phase -eq 1 -and $line -notmatch '^(-|##*)\s') {
-        #     $line.Substring(2) | Add-Content ReleaseNotes.txt
-        #   }
-        # }
+  release:
+    name: Create Release
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            README.md
+          sparse-checkout-cone-mode: false
+
+      - name: Download the package as an artifact
+        uses: actions/download-artifact@v8
+        with:
+          path: pack
+          merge-multiple: true # assuming a single artifact.
+          skip-decompress: true
+
+      - name: Prepare package
+        run: |
+          cd pack
+          cp package.au2pkg.zip ../aviutl2_script_${{ env.REPOSITORY_NAME }}-${{ github.ref_name }}.au2pkg.zip
+        # rename .zip file for downloading if necessary.
 
       - name: Prepare release notes
         id: release-notes
         run: |
-          # windows runner does not correctly provide the time with this.
-          # echo "name=${{ github.ref_name }} ($(TZ='${{ env.TIME_ZONE }}' date +'%Y-%m-%d'))" >> $GITHUB_OUTPUT
+          echo "name=${{ github.ref_name }} ($(TZ='${{ env.TIME_ZONE }}' date +'%Y-%m-%d'))" >> $GITHUB_OUTPUT
           echo "### 更新内容" >> ReleaseNotes.txt
           phase=0
-          IFS=$'\n'
-          cat README.md | while read line; do
+          while IFS= read -r line; do
             if [[ $phase == 0 ]]; then
               if [[ $line =~ ^##*[[:space:]]{1,}'改版履歴'[[:space:]]*$ ]]; then phase=1; fi
             elif [[ $phase == 1 ]]; then
               if [[ $line =~ ^-[[:space:]] ]]; then phase=2; fi
             elif [[ $line =~ ^(-|##*)[[:space:]] ]]; then break
             else
-              echo ${line:2} >> ReleaseNotes.txt
+              printf '%s\n' "${line:2}" >> ReleaseNotes.txt
             fi
-          done
+          done < README.md
 
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
-          name: ${{ steps.release-name.outputs.name }}
+          name: ${{ steps.release-notes.outputs.name }}
           files: '*.zip'
           body_path: ReleaseNotes.txt
