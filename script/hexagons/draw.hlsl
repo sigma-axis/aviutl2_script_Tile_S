@@ -7,8 +7,9 @@ cbuffer constant0 : register(b0) {
 	float4 color_back;
 	float2x2 to_lattice;
 	float2 offset;
-	float size, aa_thick;
+	float size, antialias_f;
 };
+static const bool antialias = antialias_f > 0;
 int2 modf_n(float2 pt, out float2 pt_f)
 {
 	pt_f = frac(pt);
@@ -16,7 +17,7 @@ int2 modf_n(float2 pt, out float2 pt_f)
 }
 float aa_step(float x)
 {
-	return saturate(0.5 + (aa_thick > 0 ? x / aa_thick : sign(x)));
+	return saturate(0.5 + (antialias ? x : sign(x)));
 }
 float4 mix_color(float dist, float line_thick, float4 color, float4 color_inner)
 {
@@ -31,7 +32,7 @@ float4 find_color(float2 pt, uint idx)
 		vec_tangent = { -0.5, sqrt(3) / 2 };
 	float2 u = pt - fig[idx].outer * vec_offset;
 	float dist = min(dot(vec_normal, u), u.y);
-	dist = min(dist, dot(u, vec_offset) - aa_thick / 6);
+	dist = min(dist, dot(u, vec_offset) - (antialias ? 1.0 / 6 : 0));
 	u = fig[idx].radius * vec_offset - u;
 	if (all(float2(u.x, dot(u, vec_tangent)) > 0))
 		dist = min(dist, fig[idx].radius - length(u));

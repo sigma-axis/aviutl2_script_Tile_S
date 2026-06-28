@@ -8,8 +8,9 @@ cbuffer constant0 : register(b0) {
 	float4 color_back;
 	float2x2 to_lattice;
 	float2 offset, size;
-	float aa_thick;
+	float antialias_f;
 };
+static const bool antialias = antialias_f > 0;
 int2 modf_n(float2 pt, out float2 pt_f)
 {
 	pt_f = frac(pt);
@@ -22,7 +23,7 @@ void min_max(float x, float y, out float m, out float M)
 }
 float aa_step(float x)
 {
-	return saturate(0.5 + (aa_thick > 0 ? x / aa_thick : sign(x)));
+	return saturate(0.5 + (antialias ? x : sign(x)));
 }
 float4 mix_color(float dist, float aa_dist, float line_thick, float4 color, float4 color_inner)
 {
