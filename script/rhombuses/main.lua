@@ -198,8 +198,7 @@ local dx, dy = X + width / 2, Y + height / 2;
 --#endregion PI / normalize parameters.
 
 -- further calculations.
-local some_irrational = ((block_h / block_w) % 1) + 2 ^ (1 / 3);
-dx, dy = dx + 2 ^ -12, dy + some_irrational * 2 ^ -12;
+dx, dy = dx + 2 ^ -9, dy + 1.5 * 2 ^ -9;
 local function rgb(col, alpha)
 	return
 		alpha * (bit.band(col, 0xff0000) / 0xff0000),

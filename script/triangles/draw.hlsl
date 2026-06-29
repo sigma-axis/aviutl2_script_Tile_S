@@ -77,6 +77,7 @@ float4 draw(float4 pos : SV_Position) : SV_Target
 		idx2.yz = idx2.zy;
 	}
 
+	pt.y = max(pt.y, pow(2, -24)); pt.x = max(pt.x - pt.y, pow(2, -24)) + pt.y;
 	pt = size * mul(to_triangle, pt);
 	float sum_weight = 0;
 	float4 col = find_color(pt, idx2[0], sum_weight)

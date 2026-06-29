@@ -210,7 +210,7 @@ local dx, dy = X + width / 2, Y + height / 2;
 
 -- further calculations.
 if block_square then block_h = block_w end
-dx, dy = dx + 2 ^ -12, dy + 1.5 * 2 ^ -12;
+dx, dy = dx + 2 ^ -9, dy + 1.5 * 2 ^ -9;
 local function rgb(col, alpha)
 	return
 		alpha * (bit.band(col, 0xff0000) / 0xff0000),

@@ -15,11 +15,6 @@ int2 modf_n(float2 pt, out float2 pt_f)
 	pt_f = frac(pt);
 	return int2(round(pt - pt_f));
 }
-void min_max(float x, float y, out float m, out float M)
-{
-	if (x < y) { m = x; M = y; }
-	else { m = y; M = x; }
-}
 float aa_step(float x)
 {
 	return saturate(0.5 + (antialias ? x : sign(x)));
@@ -33,22 +28,23 @@ static const float l_size = length(size);
 static const float2 flip = { 1, -1 }, n_size = size / l_size;
 float4 find_color(float2 pt, float2 slope, uint idx)
 {
-	pt.x -= slope.x / 2;
-	if (dot(pt, slope) > 0) pt *= -1;
-	if (dot(pt, flip * slope) > 0) {
-		pt = flip * pt.yx;
+	float2 dist = pt.x < pt.y ? pt : pt.yx;
+	dist *= size.x * size.y / l_size; dist -= fig[idx].outer;
+
+	float2 u = slope * (flip * pt + pt.yx) / 2;
+	u.x -= slope.x / 2;
+	if (dot(u, slope) > 0) u *= -1;
+	if (dot(u, flip * slope) > 0) {
+		u = flip * u.yx;
 		slope = slope.yx;
 	}
-	pt.x += slope.x / 2;
-	pt *= l_size;
-
-	float2 u = pt; u.x = u.x - fig[idx].outer / slope.y;
-	float dist, aa_dist; min_max(dot(u, slope.yx), dot(u, flip * slope.yx), dist, aa_dist);
-	u.x = fig[idx].radius / slope.y - u.x;
+	u.x += slope.x / 2;
+	u *= l_size;
+	u.x = (fig[idx].outer + fig[idx].radius) / slope.y - u.x;
 	if (all(float2(dot(u, slope), dot(u, flip * slope)) > 0))
-		dist = min(dist, fig[idx].radius - length(u));
+		dist[0] = min(dist[0], fig[idx].radius - length(u));
 
-	return mix_color(dist, aa_dist,
+	return mix_color(dist[0], dist[1],
 		fig[idx].line_thick, fig[idx].color, fig[idx].color_inner);
 }
 float4 draw(float4 pos : SV_Position) : SV_Target
@@ -59,11 +55,11 @@ float4 draw(float4 pos : SV_Position) : SV_Target
 	if (pt.x >= 0.5) pt = 1 - pt;
 	const float2 slope = pt.y >= 0.5 ? n_size.yx : n_size;
 	pt.y = min(pt.y, 1 - pt.y);
-	pt = slope * (flip * pt + pt.yx) / 2;
+	pt = max(pt, pow(2, -24));
 
 	const float4 col = find_color(pt, slope, idx)
-		+ find_color(-flip * pt.yx, slope.yx, idx ^ 1)
+		+ find_color(flip * pt.yx, slope.yx, idx ^ 1)
 		+ find_color(-pt, slope, idx ^ 3)
-		+ find_color(flip * pt.yx, slope.yx, idx ^ 2);
+		+ find_color(-flip * pt.yx, slope.yx, idx ^ 2);
 	return col + (1 - col.a) * color_back;
 }

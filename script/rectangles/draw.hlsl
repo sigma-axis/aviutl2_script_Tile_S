@@ -47,6 +47,7 @@ float4 draw(float4 pos : SV_Position) : SV_Target
 	const int2 pt_i = modf_n(mul(to_lattice, pos.xy - offset), pt);
 	const uint idx = uint(pt_i.x & 1) | (uint(pt_i.y & 1) << 1);
 
+	pt = max(pt, pow(2, -24));
 	pt = min(pt, 1 - pt);
 	pt *= size;
 	const float4 col = find_color(pt, idx)

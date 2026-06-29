@@ -80,6 +80,7 @@ float4 draw(float4 pos : SV_Position) : SV_Target
 		pt.x = 1 - pt.x + pt.y;
 	idx %= 3;
 
+	pt = max(pt, pow(2, -24));
 	pt = size * mul(to_triangle, pt);
 	const float4 col = find_color(pt, idx[0])
 		+ find_color(pt - 2 * dot(pt, n[1]) * n[1], idx[1])
