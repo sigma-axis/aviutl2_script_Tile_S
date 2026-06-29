@@ -349,14 +349,13 @@ Although, usage documentations for this script in languages other than Japanese 
   "1種類", "2種類", "4種類"
   ```
 
-##  次の改版予定
+##  改版履歴
 
-- **v1.22 (for beta52)** (2026-06-??)
+- **v1.22 (for beta52)** (2026-06-29)
 
   - 「アンチエイリアス」が OFF の場合の前回 (v1.21) の修正が不完全だった部分を修正．
 
-
-##  改版履歴
+    - まだ条件によっては混色が起こりますが，これ以上の補正処理はしないものとします．
 
 - **v1.21 (for beta52)** (2026-06-29)
 
