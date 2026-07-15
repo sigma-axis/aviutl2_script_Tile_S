@@ -25,7 +25,7 @@
 
   http://spring-fragrance.mints.ne.jp/aviutl
 
-  - `beta52` で動作確認済み．
+  - `2.1.0` で動作確認済み．
 
 ## 導入方法
 
@@ -348,6 +348,12 @@ Although, usage documentations for this script in languages other than Japanese 
   ```lua
   "1種類", "2種類", "4種類"
   ```
+
+##  次の改版予定
+
+- **v1.30** (2026-??-??)
+
+  - 一部設定項目にツールチップによる説明表示を追加．
 
 ##  改版履歴
 
