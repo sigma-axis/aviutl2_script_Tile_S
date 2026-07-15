@@ -349,13 +349,13 @@ Although, usage documentations for this script in languages other than Japanese 
   "1種類", "2種類", "4種類"
   ```
 
-##  次の改版予定
+##  改版履歴
 
-- **v1.30** (2026-??-??)
+- **v1.30** (2026-07-15)
 
   - 一部設定項目にツールチップによる説明表示を追加．
 
-##  改版履歴
+  - `v2.1.0` での動作確認．
 
 - **v1.23 (for beta52)** (2026-06-29)
 
